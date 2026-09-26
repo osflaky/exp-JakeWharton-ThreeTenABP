@@ -1,0 +1,43 @@
+apply plugin: 'com.android.library'
+
+dependencies {
+  api rootProject.ext.threetenbp
+
+  androidTestImplementation rootProject.ext.junit
+  androidTestImplementation rootProject.ext.testRunner
+  androidTestImplementation rootProject.ext.truth
+  androidTestUtil rootProject.ext.testOrchestrator
+}
+
+android {
+  compileSdkVersion rootProject.ext.compileSdkVersion
+
+  defaultConfig {
+    minSdkVersion rootProject.ext.minSdkVersion
+
+    testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+
+    consumerProguardFiles 'consumer-rules.pro'
+  }
+
+  testOptions {
+    execution 'ANDROIDX_TEST_ORCHESTRATOR'
+  }
+
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_7
+    targetCompatibility JavaVersion.VERSION_1_7
+  }
+
+  lintOptions {
+    textReport true
+    textOutput 'stdout'
+  }
+
+  // TODO replace with https://issuetracker.google.com/issues/72050365 once released.
+  libraryVariants.all {
+    it.generateBuildConfig.enabled = false
+  }
+}
+
+apply from: rootProject.file('gradle/gradle-mvn-push.gradle')

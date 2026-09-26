@@ -1,0 +1,33 @@
+apply plugin: 'com.android.application'
+
+dependencies {
+  implementation project(':threetenabp')
+
+  androidTestImplementation rootProject.ext.junit
+  androidTestImplementation rootProject.ext.testRunner
+  androidTestImplementation rootProject.ext.testRules
+
+  testImplementation rootProject.ext.junit
+  testImplementation rootProject.ext.robolectric
+}
+
+android {
+  compileSdkVersion rootProject.ext.compileSdkVersion
+
+  defaultConfig {
+    applicationId 'com.jakewharton.threetenabp.sample'
+    minSdkVersion rootProject.ext.minSdkVersion
+    targetSdkVersion rootProject.ext.compileSdkVersion
+    versionCode 1
+    versionName '1.0'
+
+    testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+  }
+
+  buildTypes {
+    debug {
+      minifyEnabled true
+      testProguardFiles file('test-rules.pro')
+    }
+  }
+}

@@ -1,0 +1,2 @@
+-dontwarn org.junit.**
+-dontwarn android.**
